@@ -1,8 +1,9 @@
 //jshint esversion:6
 
 //node module 이 있는지 꼭 확인할 것!
+//katacoda에서 express routing 연습할 수 있음
 
-
+const _ = require('lodash');
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -25,6 +26,8 @@ app.get("/",function(req,res){
   res.render("home",{homeStartingContent:homeStartingContent,posts:posts});
   
 });
+
+
 
 app.get("/about",function(req,res){
 
@@ -52,6 +55,25 @@ app.post("/compose",function(req,res){
   posts.push(post);
   res.redirect("/");
 
+});
+
+//lodash 는 유용한 자바스크립트 라이브러리
+app.get("/post/:postName",function(req,res){
+  const requestedTitle = _.lowerCase(req.params.postName);
+  
+  posts.forEach(function(post){
+    const savedTitle=_.lowerCase(post.title);
+    if (savedTitle === requestedTitle ){
+      res.render("post",{
+        title: post.title,
+        content: post.content
+      });
+    }
+  });
+});
+
+app.post("/post/:postName",function(req,res){
+  
 });
 
 
