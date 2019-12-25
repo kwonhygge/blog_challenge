@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/",function(req,res){
-
   res.render("home",{homeStartingContent:homeStartingContent,posts:posts});
   
 });
@@ -73,7 +72,7 @@ app.get("/post/:postName",function(req,res){
 });
 
 app.post("/post/:postName",function(req,res){
-  
+  console.log("hello");
 });
 
 
